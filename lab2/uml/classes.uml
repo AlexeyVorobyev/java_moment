@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Apartment</OriginalElement>
+  <nodes>
+    <node x="-281.0" y="-4.0">Property</node>
+    <node x="-667.5" y="320.0">Apartment</node>
+    <node x="-294.5" y="320.0">Car</node>
+    <node x="40.34429824561391" y="315.95029239766086">CountryHouse</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="CountryHouse" target="Property" relationship="GENERALIZATION">
+      <point x="0.0" y="-105.0" />
+      <point x="166.8442982456139" y="185.0" />
+      <point x="-161.0" y="185.0" />
+      <point x="48.0" y="69.0" />
+    </edge>
+    <edge source="Car" target="Property" relationship="GENERALIZATION">
+      <point x="0.0" y="-105.0" />
+      <point x="0.0" y="69.0" />
+    </edge>
+    <edge source="Apartment" target="Property" relationship="GENERALIZATION">
+      <point x="0.0" y="-105.0" />
+      <point x="-549.0" y="185.0" />
+      <point x="-257.0" y="185.0" />
+      <point x="-48.0" y="69.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.6494955489614247" showDependencies="false" x="-129.07044042397683" y="304.7802448830404" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
