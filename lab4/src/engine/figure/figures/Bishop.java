@@ -5,6 +5,8 @@ import engine.board.cell.Cell;
 import engine.figure.Figure;
 import engine.utils.Stream;
 import lombok.Builder;
+import lombok.ToString;
+
 import java.util.ArrayList;
 import static engine.utils.Stream.unlimitedDistance;
 
@@ -46,4 +48,8 @@ public class Bishop extends Figure {
         return cellArrayList;
     }
 
+    @Override
+    public String toString() {
+        return "Bishop";
+    }
 }

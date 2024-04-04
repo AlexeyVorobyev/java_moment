@@ -14,6 +14,9 @@ public abstract class Figure implements IFigure {
     @Setter
     private Player player;
 
+    @Getter
+    protected boolean moved = false;
+
     public Boolean checkCellAndAdd(
             ArrayList<Cell> cellArrayList,
             int x,

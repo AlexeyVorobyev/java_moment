@@ -74,4 +74,10 @@ public class Queen extends Figure {
 
         return cellArrayList;
     }
+
+    @Override
+    public String toString() {
+        return "Quenn";
+    }
+
 }

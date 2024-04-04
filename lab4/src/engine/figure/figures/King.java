@@ -73,4 +73,9 @@ public class King extends Figure {
 
         return cellArrayList;
     }
+
+    @Override
+    public String toString() {
+        return "King";
+    }
 }

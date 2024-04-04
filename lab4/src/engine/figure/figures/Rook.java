@@ -47,4 +47,9 @@ public class Rook extends Figure {
 
         return cellArrayList;
     }
+
+    @Override
+    public String toString() {
+        return "Rook";
+    }
 }

@@ -11,20 +11,19 @@ import java.util.Arrays;
 @Builder
 public class Knight extends Figure {
     private final int[][] matrix = {
-            {3, 1},
-            {3, -1},
-            {-3, 1},
-            {-3, -1},
-            {1, 3},
-            {-1, 3},
-            {1, -3},
-            {-1, -3},
+            {2, 1},
+            {2, -1},
+            {-2, 1},
+            {-2, -1},
+            {1, 2},
+            {-1, 2},
+            {1, -2},
+            {-1, -2},
     };
 
     @Override
     public ArrayList<Cell> calculatePossibleMoves(Cell currentCell, Board board) {
         ArrayList<Cell> cellArrayList = new ArrayList<>();
-
 
         Arrays.stream(matrix).forEach((item) -> {
             try {
@@ -33,7 +32,7 @@ public class Knight extends Figure {
                         currentCell.getY() + item[1]
                 );
 
-                cellArrayList.add(nextCell);
+                super.checkCellAndAdd(cellArrayList,nextCell.getX(),nextCell.getY(), board);
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -41,5 +40,10 @@ public class Knight extends Figure {
 
 
         return cellArrayList;
+    }
+
+    @Override
+    public String toString() {
+        return "Knight";
     }
 }
