@@ -42,12 +42,27 @@ public class Main {
                 100000
         ));
 
+        instances.add(new CountryHouse(
+                10000000,
+                1000,
+                100000
+        ));
+
         instances.forEach((item) -> {
             System.out.println("Описание проперти:");
             System.out.println(item.toString());
             System.out.println("Налог:");
             System.out.println(item.calcTax());
             System.out.println("--------------------");
+        });
+
+        instances.forEach((item) -> {
+            instances.forEach((_item) -> {
+                System.out.println(item.toString());
+                System.out.println(_item.toString());
+                System.out.println(item.equals(_item));
+                System.out.println("--------------------");
+            });
         });
     }
 }

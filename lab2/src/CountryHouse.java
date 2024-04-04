@@ -34,6 +34,27 @@ public class CountryHouse extends Property {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        CountryHouse other = (CountryHouse) obj;
+        if (
+                other.squareHold != this.squareHold
+                        || other.squareHouse != this.squareHouse
+                        || other.worth != this.worth
+        ) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
         return String.format(
                 "Дача; Площадь дома - %s; Стоимость - %f; Площадь владений - %s;",
