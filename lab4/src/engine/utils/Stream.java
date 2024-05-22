@@ -18,7 +18,7 @@ public class Stream {
     ) {
         for (
                 int x = currentCell.getX() - 1,
-                y = currentCell.getX() - 1,
+                y = currentCell.getY() - 1,
                 counter = 0;
                 x >= Expanse.leftBottomCorner.getX() && y >= Expanse.leftBottomCorner.getY() && counter < distance;
                 x--, y--, counter++
@@ -38,7 +38,7 @@ public class Stream {
     ) {
         for (
                 int x = currentCell.getX(),
-                y = currentCell.getX() - 1,
+                y = currentCell.getY() - 1,
                 counter = 0;
                 x >= Expanse.leftBottomCorner.getX() && y >= Expanse.leftBottomCorner.getY() && counter < distance;
                 y--, counter++
@@ -58,7 +58,7 @@ public class Stream {
     ) {
         for (
                 int x = currentCell.getX() - 1,
-                y = currentCell.getX(),
+                y = currentCell.getY(),
                 counter = 0;
                 x >= Expanse.leftBottomCorner.getX() && y >= Expanse.leftBottomCorner.getY() && counter < distance;
                 x--, counter++
@@ -78,7 +78,7 @@ public class Stream {
     ) {
         for (
                 int x = currentCell.getX() + 1,
-                y = currentCell.getX() + 1,
+                y = currentCell.getY() + 1,
                 counter = 0;
                 x <= Expanse.rightTopCorner.getX() && y <= Expanse.rightBottomCorner.getY() && counter < distance;
                 x++, y++, counter++
@@ -98,7 +98,7 @@ public class Stream {
     ) {
         for (
                 int x = currentCell.getX() - 1,
-                y = currentCell.getX() + 1,
+                y = currentCell.getY() + 1,
                 counter = 0;
                 x >= Expanse.rightTopCorner.getX() && y <= Expanse.rightBottomCorner.getY() && counter < distance;
                 x--, y++, counter++
@@ -118,7 +118,7 @@ public class Stream {
     ) {
         for (
                 int x = currentCell.getX(),
-                y = currentCell.getX() + 1,
+                y = currentCell.getY() + 1,
                 counter = 0;
                 x <= Expanse.rightTopCorner.getX() && y <= Expanse.rightBottomCorner.getY() && counter < distance;
                 y++, counter++
@@ -138,7 +138,7 @@ public class Stream {
     ) {
         for (
                 int x = currentCell.getX() + 1,
-                y = currentCell.getX(),
+                y = currentCell.getY(),
                 counter = 0;
                 x <= Expanse.rightTopCorner.getX() && y <= Expanse.rightBottomCorner.getY() && counter < distance;
                 x++, counter++
@@ -158,7 +158,7 @@ public class Stream {
     ) {
         for (
                 int x = currentCell.getX() + 1,
-                y = currentCell.getX() - 1,
+                y = currentCell.getY() - 1,
                 counter = 0;
                 x <= Expanse.rightBottomCorner.getX() && y >= Expanse.rightBottomCorner.getY() && counter < distance;
                 x++, y--, counter++

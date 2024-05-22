@@ -1,21 +1,20 @@
 package screen.screen;
 
 import engine.board.Board;
+import engine.board.cell.Cell;
 import engine.engine.Engine;
-import engine.figure.figures.Pawn;
 import engine.player.Side;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Screen extends JFrame {
 
@@ -25,6 +24,8 @@ public class Screen extends JFrame {
     //intialize components
     private JPanel centerPanel = new JPanel();
     private JPanel southPanel = new JPanel();
+
+    private JPanel inputPanel = new JPanel();
     private JPanel westPanel = new JPanel();
     //initialze arrays to hold panels and images of the board
     private JLabel[] labels = new JLabel[64];
@@ -36,12 +37,12 @@ public class Screen extends JFrame {
 
     public Screen(Engine engine) throws IOException {
         this.boardImage1 = ImageIO.read(new File("src/screen/image/block/blackBlock.png"));
-        ;
+
         this.boardImage2 = ImageIO.read(new File("src/screen/image/block/whiteBlock.png"));
-        ;
         this.engine = engine;
         createAndShowGUI();//call method to create gui
-        this.setPieces();
+        this.addInputToInputPanel(engine);
+        this.render();
     }
 
     private void createAndShowGUI() {
@@ -72,9 +73,63 @@ public class Screen extends JFrame {
         //call method to add panels and labels to the center panel which holds the board
         addPanelsAndLabels();
         //add all panels to frame
+
         contentPane.add(centerPanel, BorderLayout.CENTER);
         contentPane.add(southPanel, BorderLayout.SOUTH);
+        contentPane.add(inputPanel, BorderLayout.EAST);
         contentPane.add(westPanel, BorderLayout.WEST);
+    }
+
+    public static JButton inputButton = new JButton("Send");
+    public static JTextArea editTextAreaFrom = new JTextArea("12");
+    public static JTextArea editTextAreaTo = new JTextArea("14");
+
+
+    private void addInputToInputPanel(Engine engine) {
+        editTextAreaFrom.setMaximumSize(new Dimension(60,50));
+        editTextAreaFrom.setMinimumSize(new Dimension(60,50));
+        editTextAreaTo.setMaximumSize(new Dimension(60,50));
+        editTextAreaTo.setMinimumSize(new Dimension(60,50));
+        inputPanel.add(editTextAreaFrom);
+        inputPanel.add(editTextAreaTo);
+        inputPanel.add(inputButton);
+
+        inputButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // MA - Using the class field myString to receive text from text area
+
+                String fromString = editTextAreaFrom.getText();
+                String toString = editTextAreaTo.getText();
+
+                System.out.println(fromString);
+                System.out.println(toString);
+
+                System.out.println(fromString.charAt(0));
+                System.out.println(toString);
+
+                try {
+                    engine.makeMove(
+                            Cell.builder()
+                                    .x(fromString.charAt(0)  - '0')
+                                    .y(fromString.charAt(1)  - '0')
+                                    .build(),
+                            Cell.builder()
+                                    .x(toString.charAt(0)  - '0')
+                                    .y(toString.charAt(1)  - '0')
+                                    .build()
+                    );
+                    render();
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }
+
+
+//                editTextAreaFrom.setText("");
+//                editTextAreaTo.setText("");
+            }
+        });
     }
 
     private void addLabelsToSouthPanel() {
@@ -101,6 +156,7 @@ public class Screen extends JFrame {
             westPanel.add(lbls[i]);
         }
     }
+
 
     private void addPanelsAndLabels() {
 
@@ -170,20 +226,20 @@ public class Screen extends JFrame {
             if (item.getFigure().getPlayer().getSide() == Side.black) {
                 this.addPiece(
                         item.getFigure().toString(),
-                        label[item.getX() - 1] + num[item.getY() - 1],
+                        label[item.getX() - 1] + num[8 - item.getY()],
                         Color.BLUE
                 );
             } else {
                 this.addPiece(
                         item.getFigure().toString(),
-                        label[item.getX() - 1] + num[item.getY() - 1],
+                        label[item.getX() - 1] + num[8 - item.getY()],
                         Color.RED
                 );
             }
         });
     }
 
-    public void reRender() {
+    public void render() {
         this.clearPieces();
         this.setPieces();
     }

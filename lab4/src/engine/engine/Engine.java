@@ -79,7 +79,7 @@ public class Engine {
         System.out.println(boardFromCell.getFigure());
         System.out.println(boardFromCell.getFigure().getPlayer().getSide());
 
-        List<Cell> allowedMoves = boardFromCell.getFigure().calculatePossibleMoves(fromCell, this.board);
+        List<Cell> allowedMoves = boardFromCell.getFigure().calculatePossibleMoves(boardFromCell, this.board);
 
         allowedMoves.forEach((item) -> {
             System.out.printf("X:%d Y:%d Figure:%s\n",item.getX(), item.getY(), item.getFigure());
