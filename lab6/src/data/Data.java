@@ -2,8 +2,6 @@ package data;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 
 public class Data {
     public static ArrayList<Tour> data = new ArrayList<>(Arrays.asList(
