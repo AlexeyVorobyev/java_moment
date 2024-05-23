@@ -1,21 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class LotoGame extends JFrame {
     private final Board board;
     private final List<Player> players;
     private final int boardSizeX = 4;
     private final int boardSizeY = 10;
-    private final Timer gameTimer;
-
-    private final Timer restartTimer;
     private boolean restartPending = false;
 
     public LotoGame() {
@@ -23,10 +15,10 @@ public class LotoGame extends JFrame {
                 .sizeY(boardSizeY)
                 .sizeX(boardSizeX).build();
         players = new ArrayList<>();
-        players.add(new Player("Розовый", Color.PINK, board));
-        players.add(new Player("Циан", Color.CYAN, board));
-        players.add(new Player("Магнета", Color.MAGENTA, board));
-        players.add(new Player("Желтый", Color.YELLOW, board));
+        players.add(new Player("Розовый", Color.PINK, board, this));
+        players.add(new Player("Циан", Color.CYAN, board, this));
+        players.add(new Player("Магнета", Color.MAGENTA, board, this));
+        players.add(new Player("Желтый", Color.YELLOW, board, this));
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,65 +37,21 @@ public class LotoGame extends JFrame {
                             .build()
             );
 
-            button.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    if (e.getClickCount() == 2) {
-                        if (!restartPending) {
-                            restartPending = true;
-                            restartTimer.start();
-                        }
-                    }
-                }
-            });
         }
 
-        gameTimer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Random random = new Random();
-                int randomIndex;
-                do {
-                    randomIndex = random.nextInt(players.size());
-                } while (players.get(randomIndex).isFinished());
-
-                Player currentPlayer = players.get(randomIndex);
-
-                SwingWorker<Void, Void> worker = new SwingWorker<>() {
-                    @Override
-                    protected Void doInBackground() {
-                        currentPlayer.run();
-                        return null;
-                    }
-
-                    @Override
-                    protected void done() {
-                        SwingUtilities.invokeLater(LotoGame.this::updateBoard);
-                    }
-                };
-
-                worker.execute();
-
-                if (board.isFull()) {
-                    gameTimer.stop();
-                    announceWinner();
+        for (int i = 0; i < 4; i++) {
+            int finalI = i;
+            new SwingWorker<>() {
+                @Override
+                protected Void doInBackground() {
+                    players.get(finalI).run();
+                    return null;
                 }
-            }
-        });
-
-        gameTimer.start();
-
-        restartTimer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                restartPending = false;
-                restartTimer.stop();
-                resetGame();
-            }
-        });
+            }.execute();
+        }
     }
 
-    private void updateBoard() {
+    void updateBoard() {
         for (int i = 0; i < board.getSize(); i++) {
             LotoTile tile = board.getTile(i);
             JButton button = (JButton) getContentPane().getComponent(i);
@@ -120,6 +68,9 @@ public class LotoGame extends JFrame {
                 button.setBorderPainted(true);
             }
         }
+        if (this.board.isFull()) {
+            this.announceWinner();
+        }
     }
 
     private void announceWinner() {
@@ -130,21 +81,12 @@ public class LotoGame extends JFrame {
             int tilesPlaced = player.getTilesPlaced();
             if (tilesPlaced > maxTilesPlaced) {
                 maxTilesPlaced = tilesPlaced;
-                winner = player.getName();
+                winner = player.getUserName();
             }
         }
 
         JOptionPane.showMessageDialog(
                 this, "Игра окончена! Победил " + winner + " игрок" + " и набрал " + maxTilesPlaced + " очков.",
                 "Победитель", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void resetGame() {
-        board.clear();
-        for (Player player : players) {
-            player.reset();
-        }
-        gameTimer.start();
-        updateBoard();
     }
 }

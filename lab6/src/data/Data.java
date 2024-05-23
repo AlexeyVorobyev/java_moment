@@ -11,7 +11,7 @@ public class Data {
                     .price(1000)
                     .duration(123)
                     .country("Russia")
-                    .name("Welcome to Russia")
+                    .name("1")
                     .build(),
             Tour.builder()
                     .type(TourType.ski)
@@ -19,7 +19,7 @@ public class Data {
                     .price(2000)
                     .duration(123)
                     .country("Russia")
-                    .name("Welcome to Russia")
+                    .name("2")
                     .build(),
             Tour.builder()
                     .type(TourType.cruise)
@@ -27,7 +27,7 @@ public class Data {
                     .price(1000)
                     .duration(123)
                     .country("Germany")
-                    .name("Welcome to Germany")
+                    .name("3")
                     .build(),
             Tour.builder()
                     .type(TourType.excursion)
@@ -35,7 +35,7 @@ public class Data {
                     .price(5000)
                     .duration(123)
                     .country("Russia")
-                    .name("Welcome to Russia")
+                    .name("4")
                     .build()
     ));
 }

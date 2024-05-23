@@ -7,16 +7,16 @@ import engine.player.Side;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
 
 public class Screen extends JFrame {
+
+
 
     //intialize variables
     private Image boardImage1;
@@ -43,6 +43,7 @@ public class Screen extends JFrame {
         createAndShowGUI();//call method to create gui
         this.addInputToInputPanel(engine);
         this.render();
+        addComponentListener();
     }
 
     private void createAndShowGUI() {
@@ -94,41 +95,38 @@ public class Screen extends JFrame {
         inputPanel.add(editTextAreaTo);
         inputPanel.add(inputButton);
 
-        inputButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        inputButton.addActionListener(e -> {
 
-                // MA - Using the class field myString to receive text from text area
+            // MA - Using the class field myString to receive text from text area
 
-                String fromString = editTextAreaFrom.getText();
-                String toString = editTextAreaTo.getText();
+            String fromString = editTextAreaFrom.getText();
+            String toString = editTextAreaTo.getText();
 
-                System.out.println(fromString);
-                System.out.println(toString);
+            System.out.println(fromString);
+            System.out.println(toString);
 
-                System.out.println(fromString.charAt(0));
-                System.out.println(toString);
+            System.out.println(fromString.charAt(0));
+            System.out.println(toString);
 
-                try {
-                    engine.makeMove(
-                            Cell.builder()
-                                    .x(fromString.charAt(0)  - '0')
-                                    .y(fromString.charAt(1)  - '0')
-                                    .build(),
-                            Cell.builder()
-                                    .x(toString.charAt(0)  - '0')
-                                    .y(toString.charAt(1)  - '0')
-                                    .build()
-                    );
-                    render();
-                } catch (Exception ex) {
-                    System.out.println(ex.toString());
-                }
+            try {
+                engine.makeMove(
+                        Cell.builder()
+                                .x(fromString.charAt(0)  - '0')
+                                .y(fromString.charAt(1)  - '0')
+                                .build(),
+                        Cell.builder()
+                                .x(toString.charAt(0)  - '0')
+                                .y(toString.charAt(1)  - '0')
+                                .build()
+                );
+                render();
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
+            }
 
 
 //                editTextAreaFrom.setText("");
 //                editTextAreaTo.setText("");
-            }
         });
     }
 

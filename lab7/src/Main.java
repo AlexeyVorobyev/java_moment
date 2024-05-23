@@ -2,11 +2,8 @@ import classes.Platform;
 import classes.Truck;
 import classes.Ship;
 
-import java.util.concurrent.CompletableFuture;
-
 public class Main {
     public static void main(String[] args) {
-
         Truck.delay = 2000;
         Ship.delay = 2000;
 
@@ -36,6 +33,5 @@ public class Main {
         for (Ship ship : ships) {
             ship.start();
         }
-
     }
 }

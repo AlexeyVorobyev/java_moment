@@ -1,9 +1,5 @@
 package classes;
 
-import java.util.Random;
-import java.util.concurrent.CompletableFuture;
-
-
 public class Truck extends Thread {
     private int capacity;
     private Platform[] platforms;

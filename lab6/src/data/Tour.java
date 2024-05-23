@@ -14,4 +14,9 @@ public class Tour {
     private int duration;
     private int price;
     private FoodType foodType;
+
+    @Override
+    public String toString() {
+        return "Tour: " + name + " " + type + " " + country + " duration:" + duration + " " + price + " " + foodType + "\n";
+    }
 }
